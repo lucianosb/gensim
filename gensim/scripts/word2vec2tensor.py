@@ -20,7 +20,7 @@ To use the generated TSV 2D tensor and metadata file in the Projector Visualizer
 2) Choose "Load Data" from the left menu.
 3) Select "Choose file" in "Load a TSV file of vectors." and choose you local "_tensor.tsv" file
 4) Select "Choose file" in "Load a TSV file of metadata." and choose you local "_metadata.tsv" file
-
+word.encode('utf-8')
 For more information about TensorBoard TSV format please visit:
 https://www.tensorflow.org/versions/master/how_tos/embedding_viz/
 
@@ -51,7 +51,7 @@ def word2vec2tensor(word2vec_model_path,tensor_filename, binary=False):
     with open(outfiletsv, 'w+') as file_vector:
         with open(outfiletsvmeta, 'w+') as file_metadata:
             for word in model.index2word:
-                file_metadata.write(word.encode('utf-8') + '\n')
+                file_metadata.write(gensim.utils.to_unicode(word) + '\n')
                 vector_row = '\t'.join(map(str, model[word]))
                 file_vector.write(vector_row + '\n')
     
